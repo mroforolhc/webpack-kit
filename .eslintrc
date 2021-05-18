@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "max-classes-per-file": ["error", 4],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "jsx-a11y/no-static-element-interactions": ["error", { "handlers": [] }],
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-noninteractive-tabindex": 0,
+    "jsx-a11y/label-has-associated-control": 0
+  },
+  "globals": {
+    "main": "writable",
+    "settings": "readonly"
+  }
+}
