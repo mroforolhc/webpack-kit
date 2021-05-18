@@ -11,7 +11,6 @@ const isProduction = (process.env.NODE_ENV ? process.env.NODE_ENV.trim().toLower
 
 function generateHtmlPlugins(templateDir) {
   const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
-  console.log(fs.readdirSync(path.resolve(__dirname, templateDir)));
   return templateFiles.map((item) => {
     const parts = item.split('.');
     const name = parts[0];
