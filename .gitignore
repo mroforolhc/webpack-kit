@@ -5,4 +5,5 @@ node_modules
 dist
 src/styles/sprites
 stats.json
+yarn-error.log
 /src/includes/styles/sprites/svg-size.styl

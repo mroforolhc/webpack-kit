@@ -4,5 +4,13 @@
   width: $width
   height: $height
 
+=mediaUp($width)
+  @media screen and ( min-width: $width )
+    @content
+
+=mediaDown($width)
+  @media screen and ( min-width: $width )
+    @content
+
 =google-font($family)
   @import url("http://fonts.googleapis.com/css?family=#{$family}")

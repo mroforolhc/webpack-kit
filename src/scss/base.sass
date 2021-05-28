@@ -1,0 +1,147 @@
+*
+  box-sizing: border-box
+
+input[readonly]
+  cursor: default
+
+img
+  width: 100%
+
+a
+  text-decoration: none
+
+button
+  background-color: transparent
+  border: none
+  padding: 0
+  cursor: pointer
+  font-weight: 300
+
+h1, h2, h3, h4, h5, h6
+  margin: 0
+
+.body
+  font-family: "Open Sans"
+  font-size: 14px
+  line-height: 1.35
+  font-weight: 300
+  background-color: #eaeaea
+  +media(1600px)
+    font-size: 16px
+
+.container
+  padding-left: 15px
+  padding-right: 15px
+  max-width: 1580px
+  margin: auto
+
+
+.link
+  color: #005f9f
+  cursor: pointer
+  &:hover
+    color: lighten(#005f9f, 10%)
+  &:active
+    color: darken(#005f9f, 5%)
+
+.button
+  background-color: #005f9f
+  text-transform: uppercase
+  color: white
+  letter-spacing: 0.075em
+  font-size: 13px
+  padding: 8px 30px
+  box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.36)
+  transition: .3s
+  &:hover
+    background-color: lighten(#005f9f, 5%)
+  &:active
+    box-shadow: none
+  &_red
+    background-color: #ee222e
+    &:hover
+      background-color: lighten(#ee222e, 5%)
+  &_white
+    background-color: white
+    color: #2B5CA9
+    &:hover
+      background-color: white
+
+.h2, .h3
+  font-family: "PT Sans"
+  font-weight: 700
+
+.h2
+  font-size: 30px
+  +media(1600px)
+    font-size: 52px
+
+.h3
+  font-size: 16px
+  +media(1600px)
+    font-size: 18px
+
+.content-block
+  ul
+    list-style-type: none
+    padding-left: 25px
+  li
+    position: relative
+    &::before
+      content: ''
+      position: absolute
+      background-image: url("data:image/svg+xml,%3Csvg width='11' height='14' viewBox='0 0 11 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.02601 0H0L6.97399 7L0 14H4.02601L11 7L4.02601 0Z' fill='%237788BA'/%3E%3C/svg%3E%0A")
+      width: 11px
+      height: 14px
+      left: -20px
+      top: 5px
+
+.custom-select
+  position: relative
+  height: 36px
+  font-size: 14px
+  background: #fff
+  border: 1px solid #CECECE
+  color: #A4A4A4
+  padding: 0 30px 0 12px
+  display: flex
+  align-items: center
+  cursor: pointer
+  appearance: none
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='8' viewBox='0 0 16 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.159079 0.901771C0.0556306 0.798711 0.00390717 0.669887 0.00390718 0.52818C0.00390719 0.386473 0.0556307 0.257648 0.159079 0.154589C0.365975 -0.0515304 0.702183 -0.0515304 0.90908 0.154589L7.50391 6.72464L14.0987 0.154589C14.3056 -0.0515298 14.6418 -0.0515298 14.8487 0.154589C15.0556 0.360709 15.0556 0.695652 14.8487 0.901772L7.87891 7.84541C7.67201 8.05153 7.3358 8.05153 7.12891 7.84541L0.159079 0.901771Z' fill='%23C1BFBF'/%3E%3C/svg%3E%0A")
+  background-size: 16px 8px
+  background-position: right 5px top 14px
+  background-repeat: no-repeat
+
+.checkbox
+  position: relative
+  display: block
+  padding-left: 25px
+  &__input
+      position: absolute
+      left: 0
+      z-index: -1
+      width: 14px
+      opacity: 0
+      &[type="radio"] ~ .checkbox__label:before,
+      &[type="radio"] ~ .checkbox__label:after
+          border-radius: 50%
+      &:checked ~ .checkbox__label:after
+          background-color: #005f9f
+  &__label
+      cursor: pointer
+      &:before
+          content: ''
+          position: absolute
+          left: 0
+          box-sizing: border-box
+          +size(16px)
+          border: 1px solid #cecece
+          background-color: white
+          transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+      &:after
+          content: ''
+          position: absolute
+          top: 4px
+          left: 4px
+          +size(8px)

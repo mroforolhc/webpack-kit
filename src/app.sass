@@ -1,77 +1,11 @@
-// General
 @import scss/mixins
+
+// vendors
 @import normalize.css
 
-@font-face
-  src: url(assets/fonts/ValueSansPro-Regular.woff2) format("woff2"), url(assets/fonts/ValueSansPro-Regular.woff) format("woff")
-  font-family: "Value Sans Pro"
-  font-weight: 400
+@import scss/base
 
-@font-face
-  src: url(assets/fonts/ValueSansPro-Medium.woff2) format("woff2"), url(assets/fonts/ValueSansPro-Medium.woff) format("woff")
-  font-family: "Value Sans Pro"
-  font-weight: 500
-
-@font-face
-  src: url(assets/fonts/ValueSansPro-Bold.woff2) format("woff2"), url(assets/fonts/ValueSansPro-Bold.woff) format("woff")
-  font-family: "Value Sans Pro"
-  font-weight: 700
-
-*
-  box-sizing: border-box
-
-input[readonly]
-  cursor: default
-
-
-.main
-  padding: 0 15px
-  max-width: 1385px
-  margin: auto
-  line-height: 1.5
-  color: #2a1555
-
-
-// overlay
-
-.overlay
-  +size(100%)
-  position: fixed
-  top: 0
-  left: 0
-  background-color: rgba(255,255,255,0.7)
-  padding: 15px
-  display: flex
-  align-items: center
-  justify-content: center
-  visibility: hidden
-  opacity: 0
-  transition: all 0.3s
-  @media screen and ( max-width: 990px )
-    padding: 0
-  &_show
-    visibility: visible
-    opacity: 1
-
-
-// modal
-
-body.body_no-scroll
-  overflow: hidden
-  header
-    z-index: 0
-
-.overlay__modal
-  box-shadow: 0px 10px 150px rgba(0,0,0,0.15%)
-  font-family: 'Value Sans Pro', sans-serif
-  background-color: white
-  height: auto
-  max-height: 100%
-  width: 100%
-  color: #2a1555
-  display: none
-  overflow: auto
-
-.modal
-  &_open
-    display: block
+@import scss/particles/_header
+@import scss/particles/_footer
+@import scss/particles/_breadcrumb
+@import scss/particles/_pagination

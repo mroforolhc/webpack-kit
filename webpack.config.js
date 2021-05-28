@@ -4,7 +4,6 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = (process.env.NODE_ENV ? process.env.NODE_ENV.trim().toLowerCase() : '') === 'production';
@@ -16,24 +15,19 @@ function generateHtmlPlugins(templateDir) {
     const name = parts[0];
     const extension = parts[1];
 
-    if (name === 'index') {
-      return new HtmlWebpackPlugin({
-        filename: `${name}.html`,
-        template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
-        inject: 'body',
-        chunks: [`${name}`],
-      });
-    }
-
-    return new HtmlWebpackPlugin({
-      filename: `pages/${name}/index.html`,
+    const htmlConfig = {
+      filename: `${name}.html`,
       template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
       inject: 'body',
-    });
+      minify: {
+        collapseWhitespace: false,
+      },
+    };
+    return new HtmlWebpackPlugin(htmlConfig);
   });
 }
 
-const htmlPlugins = generateHtmlPlugins('./src/template/views');
+const htmlPlugins = generateHtmlPlugins('./src/pages');
 
 const config = {
   entry: {
@@ -65,12 +59,20 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.hbs$/i,
-        loader: 'handlebars-loader',
-      },
-      {
         test: /\.html$/,
         loader: 'html-loader',
+        options: {
+          minimize: false,
+          sources: {
+            list: [
+              '...',
+              {
+                attribute: 'data-bg',
+                type: 'src',
+              },
+            ],
+          },
+        },
       },
       {
         test: /\.js$/,
@@ -91,6 +93,23 @@ const config = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        use: {
+          loader: 'image-webpack-loader',
+          options: {
+            disable: !isProduction,
+            mozjpeg: {
+              progressive: true,
+              quality: 80,
+            },
+            optipng: {
+              optimizationLevel: 3,
+            },
+            pngquant: {
+              quality: [0.7, 0.9],
+              speed: 4,
+            },
+          },
+        },
         type: 'asset/resource',
         generator: {
           filename: 'assets/img/[name][ext]',
@@ -98,7 +117,12 @@ const config = {
       },
       {
         test: /\.(sass|scss|css)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: ['style-loader', {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            esModule: false,
+          },
+        }, 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -109,22 +133,4 @@ const config = {
   ].concat(htmlPlugins),
 };
 
-if (isProduction) {
-  config.plugins.push(
-    new ImageMinimizerPlugin({
-      minimizerOptions: {
-        plugins: [
-          ['pngquant', { quality: [0.6, 0.8] }],
-          ['mozjpeg', { progressive: true, quality: 80 }],
-          ['svgo'],
-          ['gifsicle'],
-        ],
-      },
-    }),
-  );
-}
-
 module.exports = config;
-
-// TODO: compress images
-// TODO: fix style="background-image"
